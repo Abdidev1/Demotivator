@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Unmotivational Generator</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=VT323&display=swap">
+<style>
+:root{
+  --bg:#000;--ink:#fff;--green:#22dd11;--orange:#ff7a00;--blue:#0a82b8;--red:#b30e0e;--purple:#8a3fd1;--gold:#c9a21a;--yellow:#ffee33;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;min-height:100vh;background:#000;color:var(--ink);font-family:'VT323','Courier New',monospace;font-size:24px;line-height:1.25;overflow-x:hidden;
+  background-image:
+   radial-gradient(1px 1px at 20px 30px,#fff,transparent),
+   radial-gradient(1px 1px at 90px 120px,#fff9,transparent),
+   radial-gradient(2px 2px at 160px 60px,#fff,transparent),
+   radial-gradient(1px 1px at 230px 180px,#fff8,transparent),
+   radial-gradient(1px 1px at 60px 210px,#fff,transparent);
+  background-size:260px 240px;animation:drift 120s linear infinite}
+@keyframes drift{to{background-position:0 240px}}
+.wrap{max-width:1000px;margin:0 auto;padding:16px 14px 40px}
+h1{font-family:'Silkscreen','Courier New',monospace;color:var(--yellow);text-align:center;font-size:clamp(22px,5vw,38px);margin:8px 0 14px;text-shadow:3px 3px 0 #7a5a00}
+nav{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:12px}
+nav button{font-family:'Silkscreen',monospace;color:#fff;cursor:pointer;font-size:clamp(12px,2.2vw,18px);padding:14px 4px;text-align:center;border:3px solid;border-color:#ffffff55 #00000088 #00000088 #ffffff55}
+nav button.on{border-color:#00000088 #ffffff88 #ffffff88 #00000088;filter:brightness(1.15)}
+nav button:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+[hidden]{display:none!important}
+.g{color:var(--green)}
+#about p{font-size:26px;margin:0 0 14px}
+.boba{border:3px dashed var(--orange);padding:12px 14px;margin:6px 0 16px}
+.boba h2{color:var(--yellow);font-size:20px}
+.boba p{margin:0!important}
+.n1{background:var(--orange)}.n2{background:var(--blue)}.n3{background:#1ea00f}.n4{background:var(--purple)}.n5{background:var(--red)}.n6{background:var(--gold)}
+.banner{background:#f6c7a4;color:#222;border:3px solid #e0905a;padding:8px 12px;font-size:22px;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:260px 1fr;gap:14px}
+.panel{background:#000;padding:14px;border:4px solid}
+.left{border-color:var(--orange);text-align:center}
+.right{border-color:#1be01b}
+h2{font-family:'Silkscreen',monospace;margin:0 0 10px;font-size:22px}
+canvas#tv{width:150px;height:112px;image-rendering:pixelated;border:6px solid #444;border-radius:6px;background:#222;display:block;margin:10px auto}
+.dash{border:2px dashed #fff;padding:4px 8px;margin-top:14px;font-size:20px}
+.visits{float:right;border:2px solid #fff;padding:2px 10px;font-family:'Silkscreen',monospace;font-size:13px}
+.visits b{color:#ff6ad5}
+.stage{position:relative;min-height:230px;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;border:2px solid #333;margin:14px 0;background:#050510;overflow:hidden}
+#quote{font-size:clamp(28px,4.4vw,40px);line-height:1.1;max-width:30ch;margin:0;color:#e8e8e8}
+#quote .cur{display:inline-block;width:.5em;height:1em;background:var(--green);vertical-align:-0.1em;animation:blink .5s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+#quote.glitch{animation:glitch .5s steps(2) 1}
+@keyframes glitch{0%{transform:translate(-6px,2px);color:#f33;text-shadow:4px 0 #0ff}25%{transform:translate(5px,-3px);text-shadow:-4px 0 #f0f}50%{transform:translate(-3px,0);color:#0ff}100%{transform:none}}
+.flash{position:fixed;inset:0;background:#7a0000;opacity:0;pointer-events:none;z-index:5}
+.flash.go{animation:fl .7s ease-out}
+@keyframes fl{0%{opacity:.85}100%{opacity:0}}
+body.shake .wrap{animation:shake .6s}
+@keyframes shake{10%{transform:translate(-9px,4px) rotate(-.6deg)}25%{transform:translate(8px,-5px) rotate(.5deg)}40%{transform:translate(-6px,6px)}60%{transform:translate(5px,-3px) rotate(-.3deg)}80%{transform:translate(-2px,2px)}100%{transform:none}}
+.doom{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle,transparent 20%,#000 90%);opacity:0}
+.doom.go{animation:fl 1.4s ease-out}
+.btn{display:block;width:100%;font-family:'Silkscreen',monospace;font-weight:700;font-size:clamp(16px,3.4vw,24px);color:#fff;background:var(--red);padding:18px 10px;cursor:pointer;border:4px solid;border-color:#ff6060 #4a0000 #4a0000 #ff6060;text-shadow:2px 2px 0 #000}
+.btn:hover{background:#d01414}
+.btn:active,.btn.press{transform:translateY(4px) scale(.97);border-color:#4a0000 #ff6060 #ff6060 #4a0000}
+.btn:focus-visible,.mute:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.row{display:flex;justify-content:space-between;align-items:center;margin-top:10px;gap:10px;color:#9bd}
+.mute{font-family:'Silkscreen',monospace;font-size:12px;background:#111;color:#fff;border:2px solid #fff;padding:6px 10px;cursor:pointer}
+footer{text-align:center;margin-top:18px;color:#8a8}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.visits{float:none;display:inline-block;margin-bottom:8px}}
+@media(prefers-reduced-motion:reduce){body,body.shake .wrap,#quote.glitch{animation:none}}
+</style>
+</head>
+<body>
+<div class="flash" id="flash"></div>
+<div class="wrap">
+  <h1>Unmotivational Generator!</h1>
+  <nav><button class="n1 on" data-view="home">home</button><button class="n2" data-view="about">about</button></nav>
+  <div class="banner">Lower your expectations today! You'll thank me never.</div>
+  <div class="grid">
+    <aside class="panel left">
+      <h2>Tune In</h2>
+      <canvas id="tv" width="50" height="38"></canvas>
+      <p>I freaking love giving up, naps and just low effort stuff in general!</p>
+      <div class="dash">be unkind to your goals</div>
+    </aside>
+    <main class="panel right" id="about" hidden>
+      <h2>About me</h2>
+      <p>Hey! I'm <span class="g">Abdi</span> (<span class="g">Abdullah Mohsin</span>), the guy who looked at every "you can do it!" poster and decided the internet needed the opposite.</p>
+      <p>I like building weird little websites, and the weirder the idea, the more fun it is to make. This one runs on plain HTML, CSS and JavaScript, with every sound made live in your browser. No audio files, no motivation.</p>
+      <div class="boba">
+        <h2>Boba Bash!</h2>
+        <p>This is a <span class="g">Boba Bash</span> project, made by me (<span class="g">Abdi</span>, aka Abdullah Mohsin) for the <span class="g">Hack Club</span> Boba Bash event.</p>
+      </div>
+      <p>Thanks for visiting. Go back home and let the site ruin your day.</p>
+    </main>
+    <main class="panel right" id="home">
+      <span class="visits">DISAPPOINTMENTS <b id="count">000000</b></span>
+      <h2>Welcome!</h2>
+      <div class="stage" id="stage">
+        <p id="quote" aria-live="polite">Press the button. Or don't. Honestly, that's more on brand.</p>
+        <div class="doom" id="doom"></div>
+      </div>
+      <button class="btn" id="go">CRUSH MY SPIRIT</button>
+      <div class="row"><span>Ver v0.01 (it never gets better)</span><button class="mute" id="mute">SOUND: ON</button></div>
+    </main>
+  </div>
+  <footer>be unkind to your computer</footer>
+</div>
+<script>
+(function(){
+var QUOTES=[
+"Never try your hardest to give 110%. The people who do are liars who don't know how math works.",
+"If you never believe in yourself, you'll never let yourself down.",
+"Nobody has the power to ruin your day because you'll probably mess it up yourself anyway.",
+"The early bird gets the worm, but the second mouse gets the cheese. Stay in bed.",
+"Shoot for the moon. If you miss, you'll float helplessly in the cold void of space.",
+"Every journey begins with a single step, usually in the wrong direction.",
+"Dream big. Then wake up, because that's where the dreaming ends.",
+"Success is a journey, not a destination. Unfortunately, so is traffic.",
+"When life gives you lemons, you'll probably drop them and slip on them.",
+"Your only limit is you. Also gravity, money, talent and Mondays.",
+"Believe in yourself. Everyone else has already made up their minds.",
+"Failure is not the opposite of success. It's just the most reliable part of the plan.",
+"Rome wasn't built in a day. Neither was your to-do list, and it still isn't finished.",
+"Follow your passion. It probably runs faster than you do.",
+"Today is the first day of the rest of your life, and it looks a lot like yesterday.",
+"Hard work pays off eventually. Procrastination pays off immediately, in guilt.",
+"Be the change you wish to see in the world. Then notice nobody noticed.",
+"Opportunity knocks only once. You were in the shower.",
+"Don't count your chickens before they hatch. They're not going to hatch anyway.",
+"Winners never quit. Quitters never lose their weekend.",
+"Stay positive. Test results disagree, but stay positive.",
+"You miss 100% of the shots you don't take, and 99% of the ones you do.",
+"Fall seven times, stand up eight. Or stay down. The floor is surprisingly comfy.",
+"Think outside the box. The box was already full of disappointment, sorry.",
+"If at first you don't succeed, congratulations, that's your average.",
+"The best time to plant a tree was 20 years ago. The second best time is never, you'll forget to water it.",
+"Great minds think alike. Yours doesn't, so that's settled.",
+"Make today count. Tomorrow's version of you will undo it anyway.",
+"Be yourself. Everyone else is taken, and honestly so is the good version of you.",
+"Don't watch the clock. It's watching you waste time."
+];
+var $=function(i){return document.getElementById(i)};
+var quote=$('quote'),btn=$('go'),flash=$('flash'),doom=$('doom'),countEl=$('count'),muteBtn=$('mute');
+var muted=false,count=0,bag=[],last=-1,token=0,AC=null;
+
+function ctx(){
+  if(!AC){var C=window.AudioContext||window.webkitAudioContext;if(C)AC=new C()}
+  if(AC&&AC.state==='suspended')AC.resume();
+  return AC;
+}
+function tone(type,f1,f2,t0,dur,vol,lp){
+  var a=ctx();if(!a||muted)return;
+  var o=a.createOscillator(),g=a.createGain(),t=a.currentTime+t0;
+  o.type=type;o.frequency.setValueAtTime(f1,t);
+  if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+dur);
+  g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+0.03);g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  var n=o;
+  if(lp){var f=a.createBiquadFilter();f.type='lowpass';f.frequency.value=lp;o.connect(f);n=f}
+  n.connect(g);g.connect(a.destination);o.start(t);o.stop(t+dur+0.05);
+}
+function noise(dur,vol){
+  var a=ctx();if(!a||muted)return;
+  var len=a.sampleRate*dur,b=a.createBuffer(1,len,a.sampleRate),d=b.getChannelData(0);
+  for(var i=0;i<len;i++)d[i]=(Math.random()*2-1)*(1-i/len);
+  var s=a.createBufferSource(),g=a.createGain(),f=a.createBiquadFilter();
+  f.type='lowpass';f.frequency.value=400;g.gain.value=vol;
+  s.buffer=b;s.connect(f);f.connect(g);g.connect(a.destination);s.start();
+}
+function doomSound(){
+  tone('sine',120,28,0,0.7,0.7);noise(0.7,0.5);
+  // sad trombone: wah wah wah waaah
+  tone('sawtooth',311,300,0.25,0.3,0.18,900);
+  tone('sawtooth',294,284,0.6,0.3,0.18,900);
+  tone('sawtooth',277,268,0.95,0.3,0.18,900);
+  tone('sawtooth',262,150,1.3,1.0,0.2,800);
+}
+function blip(){tone('square',95+Math.random()*25,null,0,0.05,0.05,500)}
+
+function next(){
+  if(!bag.length){
+    for(var i=0;i<QUOTES.length;i++)bag.push(i);
+    for(var j=bag.length-1;j>0;j--){var k=Math.floor(Math.random()*(j+1)),t=bag[j];bag[j]=bag[k];bag[k]=t}
+    if(bag[bag.length-1]===last){bag.unshift(bag.pop())}
+  }
+  last=bag.pop();return QUOTES[last];
+}
+function retrigger(el,cls){el.classList.remove(cls);void el.offsetWidth;el.classList.add(cls)}
+
+btn.addEventListener('click',function(){
+  var my=++token,text=next();
+  ctx();
+  retrigger(btn,'press');setTimeout(function(){btn.classList.remove('press')},150);
+  retrigger(flash,'go');retrigger(doom,'go');
+  document.body.classList.remove('shake');void document.body.offsetWidth;document.body.classList.add('shake');
+  doomSound();
+  count++;countEl.textContent=('000000'+count).slice(-6);
+  tvBoost=30;
+  quote.textContent='';
+  setTimeout(function(){
+    if(my!==token)return;
+    retrigger(quote,'glitch');
+    var i=0;
+    var cur=document.createElement('span');cur.className='cur';
+    var txt=document.createTextNode('');
+    quote.textContent='';quote.appendChild(txt);quote.appendChild(cur);
+    (function type(){
+      if(my!==token)return;
+      i++;txt.nodeValue=text.slice(0,i);
+      if(i%2===0)blip();
+      if(i<text.length)setTimeout(type,text[i-1]==='.'||text[i-1]===','?260:32);
+      else setTimeout(function(){if(my===token&&cur.parentNode)cur.remove()},1500);
+    })();
+  },650);
+});
+
+var navBtns=document.querySelectorAll('nav button');
+navBtns.forEach(function(b){
+  b.addEventListener('click',function(){
+    var v=b.getAttribute('data-view');
+    $('home').hidden=(v!=='home');
+    $('about').hidden=(v!=='about');
+    navBtns.forEach(function(x){x.classList.toggle('on',x===b)});
+  });
+});
+
+muteBtn.addEventListener('click',function(){muted=!muted;muteBtn.textContent='SOUND: '+(muted?'OFF':'ON')});
+
+// TV static
+var cv=$('tv'),cx=cv.getContext('2d'),img=cx.createImageData(cv.width,cv.height),tvBoost=0,lastT=0;
+var still=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function draw(t){
+  if(t-lastT>70){
+    lastT=t;
+    var d=img.data,lo=tvBoost>0?0:70,hi=tvBoost>0?255:150;
+    for(var i=0;i<d.length;i+=4){var v=lo+Math.random()*(hi-lo);d[i]=d[i+1]=d[i+2]=v;d[i+3]=255}
+    cx.putImageData(img,0,0);
+    if(tvBoost>0)tvBoost--;
+  }
+  if(!still)requestAnimationFrame(draw);
+}
+requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>
